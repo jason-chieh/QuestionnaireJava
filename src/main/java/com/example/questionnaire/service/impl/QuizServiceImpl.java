@@ -91,7 +91,6 @@ public class QuizServiceImpl implements QuizService {
 			deletedQuidList.add(qu.getQuid());
 		}
 		Questionnaire qn = qnOp.get();
-
 //		可以修改的條件:
 //		尚未發布:is_published==false  ,可以修改
 //		已發布但是尚未開始進行:is_published==true ,不可以修改 當時間必須小於start date
@@ -102,6 +101,17 @@ public class QuizServiceImpl implements QuizService {
 			return new QuizRes(RtnCode.SUCCESSFUL);
 		}
 		return new QuizRes(RtnCode.UPDATE_ERROR);
+	}
+	
+	
+	@Override
+	public QuizRes updateQuestionnaireList(List<Integer> idList) {
+		List<Questionnaire> qnList = qnDao.findByIdIn(idList);
+		for(Questionnaire qn:qnList) {
+			qn.setPublished(true);
+			qnDao.save(qn);
+		}
+		return new QuizRes(RtnCode.SUCCESSFUL);
 	}
 
 	
@@ -215,4 +225,6 @@ public class QuizServiceImpl implements QuizService {
 		
 		return null;
 	}
+
+
 }

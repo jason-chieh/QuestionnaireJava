@@ -15,20 +15,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.questionnaire.service.ifs.AddUserService;
 import com.example.questionnaire.service.ifs.QuizService;
 import com.example.questionnaire.vo.QuestionRes;
 import com.example.questionnaire.vo.QuestionnaireRes;
 import com.example.questionnaire.vo.QuizReq;
 import com.example.questionnaire.vo.QuizRes;
 import com.example.questionnaire.vo.QuizSearchReq;
+import com.example.questionnaire.vo.UserReq;
+import com.example.questionnaire.vo.UserRes;
 import com.example.questionnaire.vo.searchQuestionnaireListReq;
 
 @RestController
-@CrossOrigin      //³o­Ó¬O³s«eºİ
+@CrossOrigin      //é€™å€‹æ˜¯é€£å‰ç«¯
 public class QuizController {
 	
 	@Autowired
 	private QuizService service;
+	
+	@Autowired
+	private AddUserService addUserService;
 
 	@PostMapping(value = "api/quiz/create")
 	public QuizRes create(@RequestBody QuizReq req) {
@@ -60,7 +66,7 @@ public class QuizController {
 		return service.deleteQuestionnaire(qnidList);
 	}
 	
-	//----------------------------------------------¥H¤U´ú¸Õ¤¤  ´ú¸Õ³£¥¿±`¥i¥H¨Ï¥Î
+	//----------------------------------------------ä»¥ä¸‹æ¸¬è©¦ä¸­  æ¸¬è©¦éƒ½æ­£å¸¸å¯ä»¥ä½¿ç”¨
 	@GetMapping(value = "api/quiz/search1")
 	public QuizRes search(@RequestParam(value = "title", required = false, defaultValue = "") String title,
 				          @RequestParam(value = "startDate", required = false)@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)LocalDate startDate,
@@ -90,6 +96,27 @@ public class QuizController {
 			@RequestParam(value = "qnid", required = false) int qnid) {
 		return service.searchQuestionList(qnid);
 	}
-	//----------------------------------------------¥H¤W´ú¸Õ¤¤  ´ú¸Õ³£¥¿±`¥i¥H¨Ï¥Î
+	//----------------------------------------------ä»¥ä¸Šæ¸¬è©¦ä¸­  æ¸¬è©¦éƒ½æ­£å¸¸å¯ä»¥ä½¿ç”¨
+	
+	
+	@PostMapping(value = "api/quiz/updateQuestionnaireList")
+	public QuizRes updateQuestionnaireList(@RequestBody List<Integer> idList){
+		return service.updateQuestionnaireList(idList);
+	}
+	
+	
+	//å›ç­”å•é¡Œçš„äººè¦æ–°å¢è¿‘ä¾†
+	@PostMapping(value = "api/quiz/addAnswer")
+	public UserRes addAnswer(@RequestBody UserReq req) {
+		return addUserService.create(req);
+	}
+	
+//	//æœå°‹ä½œç­”æ­¤å•é¡Œçš„äºº
+	@GetMapping(value = "api/quiz/searchUserPeople")
+	public UserRes searchUserPeople(
+			@RequestParam(value = "qnidid", required = false) int qnid) {
+		  	return addUserService.search(qnid);
+
+	}
 	
 }

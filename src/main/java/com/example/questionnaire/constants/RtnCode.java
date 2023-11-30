@@ -9,6 +9,8 @@ public enum RtnCode {
 	QUESTIONNAIRE_ID_NOT_FOUND(404,"Questionnaire id not found"), // 
 	UPDATE_ERROR(400,"update error"), // 
 	DELETE_ERROR(400,"Delete error"), // 
+	ANSWER_SUCESS(200,"OK"), // 
+	ANSWER_ERROR(400,"error"), // 
 	;
 	
 	private int code;

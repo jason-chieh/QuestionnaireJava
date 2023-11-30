@@ -12,7 +12,9 @@ import org.springframework.util.Assert;
 
 import com.example.questionnaire.entity.Question;
 import com.example.questionnaire.entity.Questionnaire;
+import com.example.questionnaire.entity.User;
 import com.example.questionnaire.repository.QuestionnaireDao;
+import com.example.questionnaire.repository.UserDao;
 import com.example.questionnaire.service.ifs.QuizService;
 import com.example.questionnaire.vo.QnQuVo;
 import com.example.questionnaire.vo.QuestionRes;
@@ -29,6 +31,9 @@ public class QuizServiceTest {
 	
 	@Autowired
 	private QuestionnaireDao qnDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	@Test
 	public void createTest() {
@@ -169,7 +174,13 @@ public class QuizServiceTest {
 //		}
 //	}
 	
-	
+	@Test
+	public void userTest() {
+		List<User> user =userDao.findByQnidOrderByDateTime(215);
+		for( User item:user) {
+			System.out.println(item.getName());
+		}
+	}
 	
 	
 }

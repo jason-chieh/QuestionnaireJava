@@ -14,6 +14,8 @@ public interface QuizService {
 	
 	public QuizRes update(QuizReq req);
 	
+	public QuizRes updateQuestionnaireList(List<Integer> idList);
+	
 	public QuizRes deleteQuestionnaire(List<Integer> qnidList);
 	
 	public QuizRes deleteQuestion(int qnid ,List<Integer> quidList);

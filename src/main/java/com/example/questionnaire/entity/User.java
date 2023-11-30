@@ -40,14 +40,16 @@ public class User {
 	private String ans;
 	
 	@Column(name="date_time")
-	private LocalDateTime dateTime;
+	private LocalDateTime dateTime = LocalDateTime.now();
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String phoneNumber, String email, int age, int qnid, int qid, String ans) {
+	public User(String name, String phoneNumber, String email,
+			int age, int qnid, int qid, String ans) {
+		
 		super();
 		this.name = name;
 		this.phoneNumber = phoneNumber;
@@ -56,6 +58,26 @@ public class User {
 		this.qnid = qnid;
 		this.qid = qid;
 		this.ans = ans;
+	}
+
+
+
+
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
 	}
 
 	public String getName() {
@@ -113,6 +135,7 @@ public class User {
 	public void setAns(String ans) {
 		this.ans = ans;
 	}
+	
 	
 	
 }
